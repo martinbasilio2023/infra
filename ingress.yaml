@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: app-127-0-0-1.nip.io
+    http:
+      paths:
+      - path: /reactapp
+        pathType: Prefix
+        backend:
+          service:
+            name: labs-deploy
+            port:
+              number: 3000
+  - host: app-127-0-0-1.nip.io
+    http:
+      paths:
+      - path: /nginx
+        pathType: Prefix
+        backend:
+          service:
+            name: labs1-deploy
+            port:
+              number: 80
